@@ -65,7 +65,7 @@ return {
 	-- selection and quick commenting
 	{
 		"numToStr/Comment.nvim",
-		nvim = "comment",
+		name = "comment",
 		config = function()
 			require("Comment").setup({
 				mappings = {
