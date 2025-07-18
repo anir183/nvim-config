@@ -153,6 +153,7 @@ return {
 		"mbbill/undotree",
 		name = "undotree",
 		init = function()
+			vim.g.undotree_DiffCommand = "FC"
 			vim.g.undotree_WindowLayout = 2
 			vim.g.undotree_SplitWidth = 40
 			vim.g.undotree_SetFocusWhenToggle = 1
