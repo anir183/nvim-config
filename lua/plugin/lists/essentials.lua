@@ -121,7 +121,7 @@ return {
 				scroll = { enabled = false },
 				statuscolumn = { enabled = false },
 				words = {
-					enabled = true,
+					enabled = false,
 					debounce = 0,
 				},
 				terminal = {
@@ -130,9 +130,6 @@ return {
 					auto_close = true,
 				},
 			})
-
-			-- disable words by default
-			snacks.words.disable()
 
 			-- invoke lsp action on file rename via oil.nvim
 			vim.api.nvim_create_autocmd("User", {
@@ -242,16 +239,17 @@ return {
 				snacks.words.disable,
 				{ desc = "[plugin/snacks]: disable words" }
 			)
-			NMAP(
-				"<C-l>",
-				"<C-l>:lua Snacks.words.clear()<CR>",
-				{ desc = "[plugin/snacks]: clear words" }
-			)
+			NMAP("<C-l>", function()
+				vim.cmd("mode")
+				vim.cmd("redraw!")
+				vim.cmd("nohlsearch")
+				snacks.words.clear()
+			end, { desc = "[plugin/snacks]: clear words" })
 			NMAP("]w", function()
-				snacks.words.jump(1, true)
+				snacks.words.jump(vim.v.count1, true)
 			end, { desc = "[plugin/snacks]: jump to next reference" })
 			NMAP("[w", function()
-				snacks.words.jump(-1, true)
+				snacks.words.jump(-vim.v.count1, true)
 			end, { desc = "[plugin/snacks]: jump to previous reference" })
 
 			-- terminal keymaps
