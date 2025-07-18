@@ -105,11 +105,10 @@ cmd("ChangeIndent", function()
 							.. (" "):rep(tab_len)
 							.. "/g"
 					)
-
-					vim.opt.listchars:append({
-						leadmultispace = "▎" .. ("∙"):rep(tab_len - 1),
-					})
 				end
+				vim.opt.listchars:append({
+					leadmultispace = "▎" .. ("∙"):rep(tab_len - 1),
+				})
 			end)
 		end)
 	end)
