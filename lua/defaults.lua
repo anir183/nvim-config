@@ -34,16 +34,9 @@ return {
 		-- lsp_name = { lspopts }, -- alternatively false to only install and not setup
 	},
 
-	-- formatters and their setups
-	-- mason packages to be listed in the mason table
-	-- setup to be done using conform.nvim names
+	-- formatters and their setup
+	-- formatter names to be taken from conform (https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters)
 	formatters = {
-		-- use mason names here
-		mason = {
-			-- "formatter1", "formatter2", ...
-		},
-
-		-- setup using conform names (https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters)
 		-- filetype = { "formatter1", "formatter2", stop_after_first = false }
 	},
 
@@ -58,15 +51,8 @@ return {
 	},
 
 	-- linters and their setup
-	-- mason packages to be listed in the mason table
-	-- setup to be done using nvim-lint names
+	-- linter names to be taken from nvim-lint (https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters)
 	linters = {
-		-- use mason names here
-		mason = {
-			-- "linter1", "linter2", ...
-		},
-
-		-- setup using nvim-lint names (https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters)
 		-- filetype = { "linter1", "linter2" }
 	},
 

@@ -47,16 +47,14 @@ return {
 	},
 
 	formatters = {
-		mason = {
-			"stylua",
-		},
 		lua = { "stylua", lsp_format = "never" },
+		json = { "fixjson", lsp_format = "never" },
 	},
 
 	custom_formatters = {},
 
 	linters = {
-		mason = {},
+		json = { "jsonlint" },
 	},
 
 	custom_linters = {},
