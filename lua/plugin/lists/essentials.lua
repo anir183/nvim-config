@@ -66,9 +66,13 @@ return {
 					end)
 				end,
 				["next"] = function()
+					-- parameters not needed
+					---@diagnostic disable-next-line: missing-parameter
 					harpoon:list().next()
 				end,
 				["prev"] = function()
+					-- parameters not needed
+					---@diagnostic disable-next-line: missing-parameter
 					harpoon:list().prev()
 				end,
 			}, { desc = "[plugin/harpoon]: choose from harpoon actions" })
@@ -116,7 +120,10 @@ return {
 				scope = { enabled = false },
 				scroll = { enabled = false },
 				statuscolumn = { enabled = false },
-				words = { enabled = true },
+				words = {
+					enabled = true,
+					debounce = 0,
+				},
 				terminal = {
 					start_insert = false,
 					auto_insert = false,
@@ -224,6 +231,29 @@ return {
 				["search-lazy"] = snacks.picker.lazy,
 			}, { desc = "[plugin/snacks]: choose snacks picker" })
 
+			-- words keymaps
+			NMAP(
+				"<leader>wo",
+				snacks.words.enable,
+				{ desc = "[plugin/snacks]: enable words" }
+			)
+			NMAP(
+				"<leader>WO",
+				snacks.words.disable,
+				{ desc = "[plugin/snacks]: disable words" }
+			)
+			NMAP(
+				"<C-l>",
+				"<C-l>:lua Snacks.words.clear()<CR>",
+				{ desc = "[plugin/snacks]: clear words" }
+			)
+			NMAP("]w", function()
+				snacks.words.jump(1, true)
+			end, { desc = "[plugin/snacks]: jump to next reference" })
+			NMAP("[w", function()
+				snacks.words.jump(-1, true)
+			end, { desc = "[plugin/snacks]: jump to previous reference" })
+
 			-- terminal keymaps
 			NMAP(
 				"<leader>tt",
@@ -259,7 +289,7 @@ return {
 				["scratch-toggle"] = snacks.scratch,
 				["scratch-select"] = snacks.scratch.select,
 				["word-enable"] = snacks.words.enable,
-				["word-disable"] = snacks.words.disale,
+				["word-disable"] = snacks.words.disable,
 				["word-clear"] = snacks.words.clear,
 				["word-jump"] = snacks.words.jump,
 				["zen"] = snacks.zen,
@@ -284,6 +314,8 @@ return {
 			require("nvim-treesitter.install").prefer_git = true
 		end,
 		config = function()
+			-- the "missing-fields" are not necessary
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"lua",
