@@ -178,6 +178,11 @@ return {
 				{ desc = "[plugin/snacks]: find recent files" }
 			)
 			NMAP(
+				"<leader>fk",
+				snacks.picker.keymaps,
+				{ desc = "[plugin/snacks]: find keymaps" }
+			)
+			NMAP(
 				"<leader>gg",
 				snacks.picker.grep,
 				{ desc = "[plugin/snacks]: global grep" }
