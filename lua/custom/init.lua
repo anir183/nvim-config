@@ -2,5 +2,5 @@
 
 require("custom.netrw")
 require("custom.commands")
-require("custom.keymaps")
+require("custom.keymap")
 require("custom.statusline")
