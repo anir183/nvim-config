@@ -119,6 +119,12 @@ NMAP("<leader>Q", vim.cmd.ccl, { desc = "[base]: close the quick fix list" })
 NMAP("]q", vim.cmd.cnext, { desc = "[base]: walk forward in quick fix list" })
 NMAP("[q", vim.cmd.cprev, { desc = "[base]: walk backward in quick fix list" })
 
+-- location list
+NMAP("<leader>l", vim.cmd.lopen, { desc = "[base]: open the location list" })
+NMAP("<leader>L", vim.cmd.lcl, { desc = "[base]: close the location list" })
+NMAP("]l", vim.cmd.lnext, { desc = "[base]: walk forward in location list" })
+NMAP("[l", vim.cmd.lprev, { desc = "[base]: walk backward in location list" })
+
 -- lsp keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = AUGRP,
@@ -126,18 +132,48 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		NMAP(
 			"<leader>rn",
 			vim.lsp.buf.rename,
-			{ desc = "[base]:  rename symbol" }
+			{ desc = "[base/lsp]:  rename symbol" }
+		)
+		NMAP(
+			"<leader>ic",
+			vim.lsp.buf.incoming_calls,
+			{ desc = "[base/lsp]: incoming calls" }
+		)
+		NMAP(
+			"<leader>oc",
+			vim.lsp.buf.outgoing_calls,
+			{ desc = "[base/lsp]: outgoing calls" }
+		)
+		NMAP(
+			"<leader>ds",
+			vim.lsp.buf.document_symbol,
+			{ desc = "[base/lsp]: document symbol" }
 		)
 		MAP(
 			{ "n", "x" },
 			"<leader>ca",
 			vim.lsp.buf.code_action,
-			{ desc = "[base]: open code actions" }
+			{ desc = "[base/lsp]: open code actions" }
 		)
 		NMAP(
 			"gD",
 			vim.lsp.buf.declaration,
-			{ desc = "[base]: goto declarations" }
+			{ desc = "[base/lsp]: goto declaration" }
+		)
+		NMAP(
+			"gd",
+			vim.lsp.buf.definition,
+			{ desc = "[base/lsp]: goto definition" }
+		)
+		NMAP(
+			"gr",
+			vim.lsp.buf.references,
+			{ desc = "[base/lsp]: get references" }
+		)
+		NMAP(
+			"gi",
+			vim.lsp.buf.implementation,
+			{ desc = "[base/lsp]: get implementations" }
 		)
 	end,
 })
