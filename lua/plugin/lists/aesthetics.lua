@@ -63,9 +63,12 @@ return {
 			require("fidget").setup({
 				notification = {
 					override_vim_notify = true,
+					view = {
+						group_separator_hl = "Normal",
+					},
 					window = {
 						normal_hl = "Normal",
-						winblend = 0,
+						winblend = 25,
 						y_padding = 2,
 					},
 				},
@@ -75,6 +78,11 @@ return {
 				"<leader>nh",
 				"<CMD>Fidget history<CR>",
 				{ desc = "[plugin/fidget]: open notification history" }
+			)
+			NMAP(
+				"<leader>nc",
+				"<CMD>Fidget clear<CR>",
+				{ desc = "[plugin/fidget]: clear notification history" }
 			)
 		end,
 	},
