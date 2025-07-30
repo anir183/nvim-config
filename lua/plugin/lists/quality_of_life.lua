@@ -1,6 +1,61 @@
 --[[ quality of life plugins but not really necessary ]]
 
 return {
+	-- auto guess indentation
+	{
+		"nmac427/guess-indent.nvim",
+		name = "guess-indent",
+		config = function()
+			require("guess-indent").setup({
+				override_editorconfig = false,
+				filetype_exclude = {
+					"netrw",
+					"tutor",
+					"oil",
+					"",
+				},
+				buftype_exclude = {
+					"help",
+					"nofile",
+					"terminal",
+					"prompt",
+					"oil",
+				},
+			})
+
+			vim.api.nvim_create_user_command(
+				CONFIG.cmd_pre .. "AutoIndent",
+				function()
+					local tabstop = vim.opt.tabstop._value
+					local expandtab = vim.opt.expandtab._value
+
+					vim.cmd("silent! GuessIndent auto_cmd")
+					vim.opt.listchars:append({
+						leadmultispace = "▎"
+							.. ("∙"):rep(vim.opt.tabstop._value - 1),
+					})
+				end,
+				{ desc = "[plugin/guess-indent]: set indentation" }
+			)
+
+			vim.api.nvim_create_autocmd({
+				"BufReadPost",
+				"BufNewFile",
+				"BufFilePost",
+				"BufEnter",
+			}, {
+				group = AUGRP,
+				command = CONFIG.cmd_pre .. "AutoIndent",
+			})
+
+			NMAP(
+				"<leader>ai",
+				"<CMD>" .. CONFIG.cmd_pre .. "AutoIndent<CR>",
+				{ desc = "[plugin/guess-indent]: set indentation" }
+			)
+		end,
+	},
+
 	-- editable file explorer
 	{
 		"stevearc/oil.nvim",
