@@ -7,29 +7,30 @@ return {
 		name = "guess-indent",
 		config = function()
 			require("guess-indent").setup({
-				override_editorconfig = false,
-				filetype_exclude = {
-					"netrw",
-					"tutor",
-					"oil",
-					"",
-				},
-				buftype_exclude = {
-					"help",
-					"nofile",
-					"terminal",
-					"prompt",
-					"oil",
-				},
+				auto_cmd = false,
 			})
 
 			vim.api.nvim_create_user_command(
 				CONFIG.cmd_pre .. "AutoIndent",
 				function()
-					local tabstop = vim.opt.tabstop._value
-					local expandtab = vim.opt.expandtab._value
+					local ft = vim.bo.filetype
+					local ftstates = {
+						help = false,
+						netrw = false,
+						oil = false,
+						tutor = false,
+						nofile = false,
+						terminal = false,
+						prompt = false,
+						snacks_picker_input = false,
+					}
 
-					vim.cmd("silent! GuessIndent auto_cmd")
+					if ft == "" or ftstates[ft] == false then
+						return
+					end
+
+					vim.cmd.GuessIndent()
+					vim.opt.listchars:remove("leadmultispace")
 					vim.opt.listchars:append({
 						leadmultispace = "▎"
 							.. ("∙"):rep(vim.opt.tabstop._value - 1),
@@ -42,7 +43,6 @@ return {
 				"BufReadPost",
 				"BufNewFile",
 				"BufFilePost",
-				"BufEnter",
 			}, {
 				group = AUGRP,
 				command = CONFIG.cmd_pre .. "AutoIndent",

@@ -106,6 +106,8 @@ cmd("ChangeIndent", function()
 							.. "/g"
 					)
 				end
+
+				vim.opt.listchars:remove("leadmultispace")
 				vim.opt.listchars:append({
 					leadmultispace = "▎" .. ("∙"):rep(tab_len - 1),
 				})

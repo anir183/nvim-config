@@ -39,17 +39,6 @@ aucmd({
 	end,
 })
 
--- set leadmultispace on file load or focus
-aucmd("BufWinEnter", {
-	group = AUGRP,
-	callback = function()
-		local repval = vim.opt_local.tabstop._value - 1
-		vim.opt_local.listchars:append({
-			leadmultispace = "▎" .. ("∙"):rep(repval),
-		})
-	end,
-})
-
 -- make and load views to retain folds
 aucmd({
 	"BufWritePre",
