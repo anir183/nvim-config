@@ -56,7 +56,7 @@ opt.completeopt = { "menu", "menuone", "noselect", "preview" }
 opt.inccommand = "split" -- preview off screen matches in a popup
 opt.wrapscan = true
 opt.jumpoptions = "stack,view" -- makes jumping around consistent (https://www.reddit.com/r/neovim/comments/1cytkbq/comment/l7cqdmq)
-opt.shell = "pwsh"
+opt.shell = "pwsh --nologo"
 
 -- backup and history
 opt.swapfile = false
