@@ -39,8 +39,8 @@ STLN_CMPNTS = {
 	end,
 
 	indent = function()
-		local type = vim.opt.expandtab._value and "spaces" or "tabs"
-		local len = vim.opt.tabstop._value
+		local type = vim.opt_local.expandtab._value and "spaces" or "tabs"
+		local len = vim.opt_local.tabstop._value
 
 		return fmt_str:format(
 			"CursorLineNr",
