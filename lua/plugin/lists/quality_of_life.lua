@@ -23,6 +23,7 @@ return {
 						terminal = false,
 						prompt = false,
 						snacks_picker_input = false,
+						snacks_terminal = false,
 					}
 
 					if ft == "" or ftstates[ft] == false then

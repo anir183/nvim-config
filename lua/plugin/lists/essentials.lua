@@ -172,6 +172,29 @@ return {
 				snacks.picker.files,
 				{ desc = "[plugin/snacks]: find files" }
 			)
+			NMAP("<leader>FF", function()
+				snacks.picker.files({
+					hidden = true,
+					ignored = true,
+				})
+			end, {
+				desc = "[plugin/snacks]: find files hidden/ignored inclusive",
+			})
+			NMAP("<leader>FI", function()
+				snacks.picker.files({
+					ignored = true,
+				})
+			end, { desc = "[plugin/snacks]: find files ignored inclusive" })
+			NMAP("<leader>FH", function()
+				snacks.picker.files({
+					hidden = true,
+				})
+			end, { desc = "[plugin/snacks]: find files hidden inclusive" })
+			NMAP("<leader>fc", function()
+				snacks.picker.files({
+					cwd = vim.fn.stdpath("config"),
+				})
+			end, { desc = "[plugin/snacks]: find config files" })
 			NMAP(
 				"<leader>fr",
 				snacks.picker.recent,
