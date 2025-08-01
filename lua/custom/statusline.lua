@@ -64,7 +64,7 @@ STLN_CMPNTS = {
 local cmpnt = function(cmp_name)
 	return "%{%v:lua.STLN_CMPNTS." .. cmp_name .. "()%}"
 end
-vim.opt.statusline = table.concat({
+vim.opt_global.statusline = table.concat({
 	-- left
 	cmpnt("mode"),
 	cmpnt("warnings"),

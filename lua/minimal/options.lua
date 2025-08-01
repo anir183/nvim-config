@@ -1,6 +1,6 @@
 --[[ setting neovim options ]]
 
-local opt = vim.opt
+local opt = vim.opt_global
 
 -- status column
 opt.number = true

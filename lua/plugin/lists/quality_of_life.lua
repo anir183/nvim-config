@@ -31,20 +31,20 @@ return {
 					end
 
 					vim.cmd.GuessIndent()
-					vim.opt.listchars:remove("leadmultispace")
-					vim.opt.listchars:append({
+					vim.opt_local.listchars:remove("leadmultispace")
+					vim.opt_local.listchars:append({
 						leadmultispace = "▎"
-							.. ("∙"):rep(vim.opt.tabstop._value - 1),
+							.. ("∙"):rep(vim.opt_local.tabstop._value - 1),
 					})
 				end,
 				{ desc = "[plugin/guess-indent]: set indentation" }
 			)
 
-			vim.api.nvim_create_autocmd({
-				"BufReadPost",
-				"BufNewFile",
-				"BufFilePost",
-			}, {
+			AUTO_INDENT = function()
+				vim.cmd(CONFIG.cmd_pre .. "AutoIndent")
+			end
+
+			vim.api.nvim_create_autocmd("BufEnter", {
 				group = AUGRP,
 				command = CONFIG.cmd_pre .. "AutoIndent",
 			})

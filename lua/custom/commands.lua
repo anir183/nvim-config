@@ -53,20 +53,30 @@ cmd("EditOptions", function()
 end, { desc = "[custom]: edit configurations" })
 
 -- change indentation style
+AUTO_INDENT = false
 cmd("ChangeIndent", function()
-	vim.ui.select({
+	vim.ui.select(AUTO_INDENT and {
+		"auto",
+		"tabs",
+		"spaces",
+	} or {
 		"tabs",
 		"spaces",
 	}, {
 		prompt = "indentation type: ",
 	}, function(indent_type)
+		if indent_type == "auto" then
+			AUTO_INDENT()
+			return
+		end
+
 		vim.ui.select({
 			"yes",
 			"no",
 		}, {
 			prompt = "reindent: ",
 		}, function(reindent)
-			local tab_len = vim.opt.tabstop._value
+			local tab_len = vim.opt_local.tabstop._value
 			vim.ui.input({
 				prompt = "tab length: ",
 			}, function(tl)
@@ -82,20 +92,20 @@ cmd("ChangeIndent", function()
 
 				-- change indents to tabs which are easier to work with for reindenting
 				if reindent then
-					vim.opt.expandtab = false
+					vim.opt_local.expandtab = false
 
 					-- NOTE : retab command also replaces inline spaces, so we use a
 					--        substituion command instead
 					vim.cmd(
 						"silent! %s/\\(^\\s*\\)\\@<="
-							.. (" "):rep(vim.opt.tabstop._value)
+							.. (" "):rep(vim.opt_local.tabstop._value)
 							.. "/	/g"
 					)
 				end
 
 				-- setting options
-				vim.opt.expandtab = (indent_type == "spaces")
-				vim.opt.tabstop = tab_len
+				vim.opt_local.expandtab = (indent_type == "spaces")
+				vim.opt_local.tabstop = tab_len
 
 				-- change indents to spaces if the user selected the same
 				-- NOTE : at this point all indentation is already in tabs
@@ -107,8 +117,8 @@ cmd("ChangeIndent", function()
 					)
 				end
 
-				vim.opt.listchars:remove("leadmultispace")
-				vim.opt.listchars:append({
+				vim.opt_local.listchars:remove("leadmultispace")
+				vim.opt_local.listchars:append({
 					leadmultispace = "▎" .. ("∙"):rep(tab_len - 1),
 				})
 			end)

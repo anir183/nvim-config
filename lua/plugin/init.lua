@@ -23,7 +23,7 @@ if not (vim.uv or vim.loop).fs_stat(lazy_path) then
 		os.exit(1)
 	end
 end
-vim.opt.rtp:prepend(lazy_path)
+vim.opt_global.rtp:prepend(lazy_path)
 
 -- plugin actions keymap
 AMAP = function(map, commands, ...)
