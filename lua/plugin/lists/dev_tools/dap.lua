@@ -106,7 +106,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		name = "dap_ui",
+		name = "dap-ui",
 		dependencies = {
 			"dap",
 			"nio",

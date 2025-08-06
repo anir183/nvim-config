@@ -49,12 +49,12 @@ STLN_CMPNTS = {
 	end,
 
 	warnings = function()
-		local count = vim.diagnostic.count()[vim.diagnostic.severity.WARN] or ""
-		return fmt_str:format("DiagnosticWarn", " " .. count)
+		local count = vim.diagnostic.count(0)[vim.diagnostic.severity.WARN]
+		return fmt_str:format("DiagnosticWarn", " " .. (count or ""))
 	end,
 
 	errors = function()
-		local count = vim.diagnostic.count()[vim.diagnostic.severity.ERROR]
+		local count = vim.diagnostic.count(0)[vim.diagnostic.severity.ERROR]
 		count = count and " " .. count or " "
 		return fmt_str:format("DiagnosticError", count)
 	end,
