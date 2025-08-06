@@ -18,7 +18,7 @@ return {
 					end
 				end
 
-				conform.format({
+				local success, result = pcall(conform.format, {
 					async = true,
 					quiet = true,
 				}, function(err, did_edit)
@@ -40,6 +40,11 @@ return {
 						end
 					end
 				end)
+
+				if not success then
+					vim.notify("An error occurred during formatting!")
+					vim.notify(result)
+				end
 			end
 
 			conform.setup({
