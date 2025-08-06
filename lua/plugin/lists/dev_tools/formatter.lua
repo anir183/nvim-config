@@ -26,7 +26,7 @@ return {
 					if not err then
 						if did_edit then
 							vim.notify("Formatted File!")
-							vim.cmd("w")
+							vim.cmd("silent! w")
 						elseif from_keymap then
 							vim.notify("No formatting required!")
 						end
