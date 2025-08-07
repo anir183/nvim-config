@@ -18,6 +18,8 @@ return {
 					end
 				end
 
+				local path = vim.fn.expand("%:p")
+
 				local success, result = pcall(conform.format, {
 					async = true,
 					quiet = true,
@@ -26,7 +28,7 @@ return {
 					if not err then
 						if did_edit then
 							vim.notify("Formatted File!")
-							vim.cmd("silent! w")
+							vim.cmd("silent! w " .. path)
 						elseif from_keymap then
 							vim.notify("No formatting required!")
 						end
